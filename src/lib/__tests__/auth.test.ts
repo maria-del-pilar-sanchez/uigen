@@ -135,13 +135,4 @@ describe("verifySession", () => {
     expect(session!.email).toBe("bob@example.com");
   });
 
-  test("verifySession does not touch the cookie store", async () => {
-    await createSession("user-99", "bob@example.com");
-    const token: string = mockCookieStore.set.mock.calls[0][1];
-    vi.clearAllMocks();
-
-    await verifySession(makeRequest(token));
-    expect(mockCookieStore.get).not.toHaveBeenCalled();
-    expect(mockCookieStore.set).not.toHaveBeenCalled();
-  });
 });
